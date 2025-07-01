@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz - Distúrbios Renais e Eletrolíticos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f2f2f2;
+    }
+    .quiz-container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    .answer {
+      margin: 5px 0;
+    }
+    #submit {
+      display: block;
+      margin: 30px auto;
+      padding: 10px 30px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .correct-answer {
+      color: green;
+      margin-top: 5px;
+    }
+    #result {
+      text-align: center;
+      font-size: 20px;
+      margin-top: 30px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="quiz-container">
+    <h2>Quiz - Distúrbios Renais e Eletrolíticos</h2>
+    <form id="quizForm"></form>
+    <button id="submit">Finalizar Quiz</button>
+    <div id="result"></div>
+  </div>
+  
+  <script>
+    const questions = [
+      {
+        q: "1. Qual é a definição de Insuficiência Renal Aguda (IRA)?",
+        options: [
+          "Perda lenta e progressiva da função renal",
+          "Deterioração rápida da função renal com retenção de resíduos nitrogenados",
+          "Retenção de água e sódio sem prejuízo renal",
+          "Filtração normal com baixa excreção de potássio"
+        ],
+        answer: 1
+      },
+      {
+        q: "2. A classificação da IRA em 'pós-renal' está relacionada a:",
+        options: [
+          "Dano direto aos néfrons",
+          "Hipoperfusão sem lesão parenquimatosa",
+          "Obstrução do fluxo urinário",
+          "Hipertrofia compensatória"
+        ],
+        answer: 2
+      },
+      {
+        q: "3. Qual dos seguintes é um fator de risco comum tanto para IRA quanto para IRC?",
+        options: [
+          "Osteodistrofia renal",
+          "Diabetes Mellitus",
+          "Hiponatremia",
+          "Hipomagnesemia"
+        ],
+        answer: 1
+      },
+      {
+        q: "4. Em qual estágio da IRC a TFG é inferior a 15 mL/min?",
+        options: ["Estágio 2", "Estágio 3", "Estágio 4", "Estágio 5"],
+        answer: 3
+      },
+      {
+        q: "5. A hiponatremia é caracterizada por:",
+        options: [
+          "Concentração de Na⁺ superior a 145 mEq/L",
+          "Sódio plasmático inferior a 135 mEq/L",
+          "Potássio sérico inferior a 3,5 mEq/L",
+          "Déficit de magnésio associado à acidose"
+        ],
+        answer: 1
+      },
+      {
+        q: "6. A principal causa de hipercalemia é:",
+        options: [
+          "Hipoparatireoidismo",
+          "Hiperaldosteronismo",
+          "Insuficiência renal",
+          "Desnutrição"
+        ],
+        answer: 2
+      },
+      {
+        q: "7. Qual cuidado é essencial na diálise peritoneal?",
+        options: [
+          "Monitorar função hepática diariamente",
+          "Utilizar bicarbonato como solução padrão",
+          "Capacitar paciente para técnica asséptica",
+          "Aumentar a ingestão de sódio"
+        ],
+        answer: 2
+      },
+      {
+        q: "8. O hormônio antidiurético (ADH) atua principalmente em:",
+        options: [
+          "Ossos longos e medula óssea",
+          "Sistema nervoso central",
+          "Túbulos renais para reabsorção de água",
+          "Músculo cardíaco para aumento do débito"
+        ],
+        answer: 2
+      },
+      {
+        q: "9. Em relação ao transplante renal, qual complicação ocorre minutos a horas após a cirurgia?",
+        options: [
+          "Rejeição crônica",
+          "Rejeição aguda",
+          "Infecção oportunista",
+          "Rejeição hiperaguda"
+        ],
+        answer: 3
+      },
+      {
+        q: "10. A osteodistrofia renal é uma complicação associada à:",
+        options: [
+          "Retenção de líquidos",
+          "Hipomagnesemia",
+          "Doença renal crônica",
+          "Diálise peritoneal automatizada"
+        ],
+        answer: 2
+      },
+      {
+        q: "11. Qual das seguintes condições está associada à IRA pré-renal?",
+        options: ["Necrose tubular aguda", "Hipovolemia", "Glomerulonefrite", "Cálculos renais"],
+        answer: 1
+      },
+      {
+        q: "12. A diálise peritoneal utiliza como membrana de filtração:",
+        options: ["Glomérulo", "Dialisador sintético", "Capilares pulmonares", "Peritônio"],
+        answer: 3
+      },
+      {
+        q: "13. Uma complicação comum da hemodiálise é:",
+        options: ["Hipertrofia ventricular esquerda", "Hipotensão durante a sessão", "Obstrução intestinal", "Hipercalcemia"],
+        answer: 1
+      },
+      {
+        q: "14. O cateter de Tenckhoff é utilizado em:",
+        options: ["Transplante renal", "Hemodiálise temporária", "Diálise peritoneal", "Biópsia renal"],
+        answer: 2
+      },
+      {
+        q: "15. Qual exame confirma o diagnóstico etiológico da IRC?",
+        options: ["Ultrassonografia", "Creatinina sérica", "Biópsia renal", "Cistatina C"],
+        answer: 2
+      },
+      {
+        q: "16. A principal manifestação clínica da hipocalcemia é:",
+        options: ["Poliúria", "Hipotensão", "Tetania e espasmos musculares", "Bradicardia"],
+        answer: 2
+      },
+      {
+        q: "17. Em pacientes com IRC, a restrição proteica recomendada é de aproximadamente:",
+        options: ["1,5 g/kg/dia", "0,6–0,8 g/kg/dia", "2,0 g/kg/dia", "1,2 g/kg/dia"],
+        answer: 1
+      },
+      {
+        q: "18. Qual hormônio atua promovendo a reabsorção de sódio nos túbulos renais?",
+        options: ["ADH", "ANP", "PTH", "Aldosterona"],
+        answer: 3
+      },
+      {
+        q: "19. Um dos principais objetivos dos cuidados paliativos na doença renal avançada é:",
+        options: ["Suspender a hemodiálise", "Eliminar o uso de medicamentos", "Alcançar a cura completa", "Controlar sintomas e oferecer suporte emocional"],
+        answer: 3
+      },
+      {
+        q: "20. A vacinação indicada para pacientes renais inclui, EXCETO:",
+        options: ["Hepatite B", "Influenza", "HPV", "Pneumococo"],
+        answer: 2
+      }
+    ];
+
+    const form = document.getElementById("quizForm");
+    questions.forEach((q, index) => {
+      const div = document.createElement("div");
+      div.className = "question";
+      div.innerHTML = `<p>${q.q}</p>` +
+        q.options.map((opt, i) => `
+          <label class="answer">
+            <input type="radio" name="q${index}" value="${i}"> ${opt}
+          </label><br>`
+        ).join("");
+      form.appendChild(div);
+    });
+
+    document.getElementById("submit").addEventListener("click", function() {
+      let score = 0;
+      questions.forEach((q, index) => {
+        const selected = document.querySelector(`input[name='q${index}']:checked`);
+        const div = form.children[index];
+        const correct = q.options[q.answer];
+        const feedback = document.createElement("div");
+        feedback.className = "correct-answer";
+        feedback.textContent = `Resposta correta: ${correct}`;
+        div.appendChild(feedback);
+        if (selected && parseInt(selected.value) === q.answer) {
+          score++;
+        }
+      });
+      document.getElementById("result").textContent = `Você acertou ${score} de ${questions.length} questões.`;
+      document.getElementById("submit").disabled = true;
+    });
+  </script>
+</body>
+</html>
