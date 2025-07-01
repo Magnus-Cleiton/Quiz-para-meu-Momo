@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz - Distúrbios Neurodegenerativos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+      padding: 20px;
+    }
+    .quiz-container {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .question {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .options label {
+      display: block;
+      margin-bottom: 8px;
+      cursor: pointer;
+    }
+    .btn {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .score {
+      font-size: 20px;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div class="quiz-container">
+  <h2>Quiz - Distúrbios Neurodegenerativos</h2>
+  <div id="quiz"></div>
+  <button class="btn" onclick="submitQuiz()">Finalizar Quiz</button>
+  <div id="score" class="score"></div>
+</div>
+
+<script>
+  const questions = [
+    {
+      q: "Qual é a principal característica das doenças neurodegenerativas?",
+      options: [
+        "Regeneração contínua dos neurônios",
+        "Inflamação temporária do sistema nervoso",
+        "Degradação progressiva e irreversível dos neurônios",
+        "Crescimento anormal de tecidos cerebrais"
+      ],
+      answer: 2
+    },
+    {
+      q: "Qual proteína está associada à Doença de Alzheimer por formar placas extracelulares?",
+      options: ["Dopamina", "Beta-amiloide", "Tau", "Huntingtina"],
+      answer: 1
+    },
+    {
+      q: "Qual é o principal fator de risco não-modificável para o Alzheimer?",
+      options: ["Atividade física", "Sexo masculino", "Idade avançada", "Tabagismo"],
+      answer: 2
+    },
+    {
+      q: "Um dos primeiros sintomas da Doença de Alzheimer em estágio leve é:",
+      options: ["Disfagia", "Incontinência", "Esquecimento de informações recentes", "Delírios visuais"],
+      answer: 2
+    },
+    {
+      q: "Qual medicamento é um antagonista NMDA utilizado no tratamento do Alzheimer?",
+      options: ["Donepezil", "Rivastigmina", "Galantamina", "Memantina"],
+      answer: 3
+    },
+    {
+      q: "A estimulação cognitiva no Alzheimer pode incluir:",
+      options: ["Reabilitação pulmonar", "Jejum intermitente", "Quebra-cabeças e jogos de memória", "Bloqueio de estímulos"],
+      answer: 2
+    },
+    {
+      q: "A Doença de Parkinson afeta principalmente:",
+      options: ["Hipotálamo", "Substância negra", "Corpo caloso", "Hipocampo"],
+      answer: 1
+    },
+    {
+      q: "Qual é o sintoma motor cardinal da Doença de Parkinson?",
+      options: ["Cefaleia", "Coreia", "Tremor em repouso", "Paralisia flácida"],
+      answer: 2
+    },
+    {
+      q: "O teste terapêutico com levodopa é usado para:",
+      options: ["Diagnosticar Alzheimer", "Confirmar Parkinson", "Avaliar distúrbios psiquiátricos", "Tratar ELA"],
+      answer: 1
+    },
+    {
+      q: "Uma complicação comum da cirurgia de estimulação cerebral profunda é:",
+      options: ["Catarata", "Infecção", "Hipocalcemia", "Diabetes"],
+      answer: 1
+    },
+    {
+      q: "A Esclerose Lateral Amiotrófica (ELA) afeta:",
+      options: ["Apenas neurônios sensoriais", "Apenas neurônios cerebelares", "Neurônios motores superiores e inferiores", "Astrócitos e micróglias"],
+      answer: 2
+    },
+    {
+      q: "Um sintoma bulbar típico na ELA é:",
+      options: ["Hipotensão postural", "Disfagia", "Hipercinesia", "Hiperatividade"],
+      answer: 1
+    },
+    {
+      q: "Qual tratamento farmacológico é aprovado no Brasil para ELA?",
+      options: ["Pramipexol", "Riluzol", "Donepezil", "Levodopa"],
+      answer: 1
+    },
+    {
+      q: "A Doença de Huntington é causada por:",
+      options: ["Infecção viral aguda", "Mutação no gene FXN", "Expansão de repetições CAG no gene HTT", "Deficiência de vitamina E"],
+      answer: 2
+    },
+    {
+      q: "Uma manifestação cognitiva precoce da Doença de Huntington é:",
+      options: ["Delírios", "Déficits executivos", "Amnésia total", "Agnosia"],
+      answer: 1
+    },
+    {
+      q: "A demência com corpos de Lewy se caracteriza por:",
+      options: ["Marcha instável e convulsões", "Perda auditiva e rigidez", "Alucinações visuais e flutuações cognitivas", "Insônia e hiperatividade motora"],
+      answer: 2
+    },
+    {
+      q: "A demência frontotemporal geralmente causa:",
+      options: ["Déficit motor unilateral", "Comportamentos desinibidos e repetitivos", "Perda visual abrupta", "Hiperatividade vesical"],
+      answer: 1
+    },
+    {
+      q: "Qual exame é padrão-ouro para detectar atrofias cerebrais?",
+      options: ["Eletrocardiograma", "SPECT", "Ressonância magnética", "PET-CT"],
+      answer: 2
+    },
+    {
+      q: "Uma das medidas preventivas para doenças neurodegenerativas é:",
+      options: ["Consumo de dietas hiperlipídicas", "Estímulo cognitivo contínuo", "Uso prolongado de sedativos", "Exposição a metais pesados"],
+      answer: 1
+    },
+    {
+      q: "A escala de Morse é utilizada para:",
+      options: ["Avaliar função pulmonar", "Estimar carga viral", "Avaliar risco de quedas", "Medir saturação de oxigênio"],
+      answer: 2
+    }
+  ];
+
+  function submitQuiz() {
+    let score = 0;
+    questions.forEach((q, i) => {
+      const selected = document.querySelector(`input[name=q${i}]:checked`);
+      if (selected && parseInt(selected.value) === q.answer) {
+        score++;
+      }
+    });
+    document.getElementById("score").innerText = `Você acertou ${score} de ${questions.length} perguntas.`;
+  }
+
+  function loadQuiz() {
+    const quizDiv = document.getElementById("quiz");
+    questions.forEach((q, i) => {
+      const qDiv = document.createElement("div");
+      qDiv.classList.add("question-block");
+      qDiv.innerHTML = `<p class='question'><strong>${i + 1}.</strong> ${q.q}</p>`;
+      const opts = document.createElement("div");
+      opts.classList.add("options");
+      q.options.forEach((opt, j) => {
+        opts.innerHTML += `
+          <label>
+            <input type="radio" name="q${i}" value="${j}"> ${opt}
+          </label>
+        `;
+      });
+      qDiv.appendChild(opts);
+      quizDiv.appendChild(qDiv);
+    });
+  }
+
+  window.onload = loadQuiz;
+</script>
+</body>
+</html>
